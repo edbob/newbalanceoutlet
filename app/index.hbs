@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="css/libs.min.css" />
+    <link rel="stylesheet" href="css/main.css" />
+    <script src="js/libs.min.js"></script>
+</head>
+
+<body>
+    <!--Header-->
+    <header>
+        <nav>
+            <div class="container">
+                <div class="row">
+                    <div class="navbar-header my-heder">
+                        <button class="navbar-toggle collapsed menu_btn" data-toggle="collapse" data-target="#top_menu">
+                            <span class="glyphicon glyphicon-menu-hamburger"></span>
+                        </button>
+                        
+                        <a href="index.html" class="navbar-brand logo" id="logo"></a>
+
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+            <h1><span id="num"></span><span id="article"></span></h1>
+        <p>
+            <select class="form-control">
+                <option value="false" selected disabled>Выберите красовки : </option>
+                <option value="https://joesnewbalanceoutlet.com/men/shoes/">Мужские</option>
+                <option value="https://joesnewbalanceoutlet.com/women/shoes/">Женские</option>
+                <option value="https://joesnewbalanceoutlet.com/kids/boys/">Детские</option>
+            </select>
+            <input id="range" type="range" min="1" max="24" step="1" value="{{num}}" />
+        </p>
+    </div>
+    <section class="main">
+        <div class="container">
+            <div class="row">
+
+            </div>
+        </div>
+    </section>
+    <script>
+        $(function () {
+            var $select = $(".form-control"),
+                $range = $('#range'),
+                $num = $('#num'),
+                $article = $('#article');
+            $num.text($range.val());
+            $article.text(form($range.val(), ['пункт', 'пунктов', 'пуункта']));
+
+            $range.change(function () {
+                $num.text($range.val());
+                $article.text(form($range.val(), ['пункт', 'пунктов', 'пуункта']));
+            });
+
+            $select.change(function () {
+                $(".col-md-3").remove();
+                $.post('/ajax', { 'url': $select.val(), 'num': $range.val() }, function (data) {
+                    if (data.status == 'error') {
+                        alert('error getting data')
+                        return;
+                    }
+                    $.each(data.data, function (index, param) {
+                        var host = "https://joesnewbalanceoutlet.com";
+                        $(".main .container .row")
+                        .append('<div class="col-md-3">'
+                             + "<img src=" + param.imgs + " />" + "<br />"
+                             + param.title + "<br /> " 
+                             + param.price + "<br />"
+                             + param.origPrice + " <br /> "
+                             + param.savePrice + "<br />"
+                             + "<a href="+ host + param.url  + ">" + "View Details" + "</a>" + "<br />"
+                             );
+                    });
+                }, 'json')
+                    .fail(function () {
+                        alert('error connect');
+                    });
+            });
+            function form(n, arr) {
+                n = n % 100;
+                var n1 = n % 10;
+                if (n > 10 && n < 20) return arr[1];
+                if (n1 > 1 && n1 < 5) return arr[2];
+                if (n1 == 1) return arr[0];
+                return arr[1];
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,20 @@
+#num {
+  margin-right: 5px;
+  font-size: 11px; }
+
+#article {
+  font-size: 11px; }
+
+#logo {
+  background-image: url(/img/logo.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  -webkit-background-size: cover;
+          background-size: cover;
+  display: block;
+  float: left;
+  width: 175px;
+  height: 43px; }
+
+.my-heder {
+  margin-top: 12px; }
