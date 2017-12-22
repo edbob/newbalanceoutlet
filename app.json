@@ -1,0 +1,7 @@
+{
+    "name": "Node.js Getting Started",
+    "description": "A brebones Node.js app using Express 4",
+    "repository": "https://github.com/edbob/newbalanceoutlet",
+    "keywords": ["node", "express", "static"],
+    "image": "heroku/nodejs"
+}

@@ -1,14 +1,15 @@
 {
   "dependencies": {
-    "express": "4.x",
     "body-parser": "1.x",
+    "cheerio": "*",
+    "colors": "^1.1.2",
     "consolidate": "0.x",
+    "cookie-parser": "*",
+    "express": "4.x",
     "handlebars": "2.x",
     "path": "*",
-    "serve-favicon": "*",
-    "cookie-parser": "*",
     "request": "*",
-    "cheerio": "*"
+    "serve-favicon": "*"
   },
   "name": "grabber",
   "version": "1.0.0",

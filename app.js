@@ -6,7 +6,11 @@ var express = require('express'),
     request = require('request'),
     cheerio = require('cheerio'),
     hbs = require('hbs'),
-    app = express();
+    colors = require('colors'),
+    app = express(),
+    port = process.env.PORT || 8087,
+    host = process.env.host || "localhost";
+
 app.use(express.static(path.join(__dirname, 'app')));
 app.use(favicon(path.join(__dirname, 'dist/img', 'favicon.ico')));
 
@@ -82,6 +86,12 @@ app.use(function (err, req, res, next) {
     });
 });
 
-app.listen(3000);
-console.log('Express listening on port 3000');
+app.listen(port, function(err){
+    if(err){
+        console.log(err);
+    }else{
+        console.log('app starter: '.green + host + ':' + port);
+    };
+});
+
 module.exports = app;
