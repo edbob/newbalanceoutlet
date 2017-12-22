@@ -1,4 +1,4 @@
 .vscode/
-node_modules
 dist/img/**/*.png
 resource.json
+gulpfile.js
