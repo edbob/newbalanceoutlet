@@ -1,32 +1,23 @@
 var express = require('express'),
     path = require('path'),
-    favicon = require('serve-favicon'),
     cookieParser = require('cookie-parser'),
     bodyParser = require('body-parser'),
     request = require('request'),
     cheerio = require('cheerio'),
-    hbs = require('hbs'),
-    colors = require('colors'),
-    app = express(),
-    port = process.env.PORT || 8087,
-    host = process.env.host || "localhost";
+    homeStor = express.Router();
 
-app.use(express.static(path.join(__dirname, 'app')));
-app.use(favicon(path.join(__dirname, 'dist/img', 'favicon.ico')));
+homeStor.use(bodyParser.json());
+homeStor.use(bodyParser.urlencoded({ extended: false }));
+homeStor.use(cookieParser());
 
-app.set('views', path.join(__dirname, 'app'));
-app.set('view engine', 'hbs');
-
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
-
-app.get('/', function (req, res) {
+homeStor.get('/', function (req, res) {
     var c = req.cookies.num;
-    res.render('index', { title: "New Balance Running Shoes", num: c != undefined ? c : 5 })
+
+    res.render('pages/home', 
+    { title: 'Домашняя страница покупок', num: c != undefined ? c : 4 });
 });
 
-app.post('/ajax', function (req, res) {
+homeStor.post('/ajax', function (req, res) {
     res.cookie('num', req.body.num);
     getContent({ 'url': req.body.url, 'count': req.body.num }, function (data) {
         res.json(data);
@@ -68,8 +59,8 @@ function getContent(req, collback) {
     });
 };
 
-if (app.get('env') === 'development') {
-    app.use(function (err, req, res, next) {
+if (homeStor.get('env') === 'development') {
+    homeStor.use(function (err, req, res, next) {
         res.status(err.status || 500);
         res.render('error', {
             message: err.message,
@@ -78,7 +69,7 @@ if (app.get('env') === 'development') {
     });
 }
 
-app.use(function (err, req, res, next) {
+homeStor.use(function (err, req, res, next) {
     res.status(err.status || 500);
     res.render('error', {
         message: err.message,
@@ -86,12 +77,4 @@ app.use(function (err, req, res, next) {
     });
 });
 
-app.listen(port, function(err){
-    if(err){
-        console.log(err);
-    }else{
-        console.log('app starter: '.green + host + ':' + port);
-    };
-});
-
-module.exports = app;
+module.exports = homeStor;

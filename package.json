@@ -1,24 +1,27 @@
 {
+  "name": "node-site",
+  "version": "1.0.0",
+  "description": "node-site proj",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Nedov",
+  "license": "ISC",
   "dependencies": {
     "body-parser": "1.x",
     "cheerio": "*",
     "colors": "^1.1.2",
     "consolidate": "0.x",
     "cookie-parser": "*",
+    "ejs": "^2.5.7",
     "express": "4.x",
+    "express-ejs-layouts": "^2.3.1",
     "handlebars": "2.x",
+    "hbs": "^4.0.1",
+    "nodemailer": "^4.4.1",
     "path": "*",
     "request": "*",
-    "serve-favicon": "*",
-    "hbs": "^4.0.1"
-  },
-  "name": "grabber",
-  "version": "1.0.0",
-  "description": "grobber proj",
-  "main": "app.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "Nedov",
-  "license": "ISC"
+    "serve-favicon": "*"
+  }
 }
