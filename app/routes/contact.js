@@ -1,8 +1,13 @@
 var express = require('express');
 var nodemailer = require('nodemailer');
 var colors = require('colors');
+var hostName = process.env.host || "localhost:";
 
-var sentmail = express.Router();
+var contact = express.Router();
+
+contact.get('/contact', function (req, res) {
+  res.render('pages/contact');
+});
 
 var transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -16,29 +21,26 @@ var transporter = nodemailer.createTransport({
   });
   
   var url = require('url');
-  
   var dateNow = new Date().toString().slice(8, 24);
   
-  sentmail.post('/contact', function (req, res) {
-    var host = req.hostname;
-    var host2 = req.headers.host;
+  contact.post('/contact', function (req, res) {
     var mailOptions = {
-      from:'Отправитель: ' + host2 + '<' + req.body.email + '>',
+      from: hostName +  '<'+req.body.email+'>',
       to: 'nedov@outlook.com',
       subject: req.body.name,
-      text: req.body.message,
-      html: '<p>Email отправителя: '+ req.body.email +'</p>'
+      text: req.body.message
+      // html: '<p>Email отправителя: '+ req.body.email +'</p>'
     };
   
     transporter.sendMail(mailOptions, function (err, res) {
       if (err) {
         console.log('Error: '.red + err.message + ' [' + dateNow + ']');
       } else {
-        console.log('Email Sent from: ' + req.body.email + "'".green + ' [' + dateNow + ']');
+        console.log('Email Sent from: ' + req.body.email + "'".green + ' Text: ' + req.body.message + ' [' + dateNow + ']');
       }
     });
   
     res.send('Thanks for contacting us, ' + req.body.name + '! We will respond shortly!');
   });
 
-  module.exports = sentmail;
+  module.exports = contact;

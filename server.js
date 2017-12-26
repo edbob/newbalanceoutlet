@@ -19,11 +19,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 var router = require('./app/routes/router');
 app.use('/', router);
 
-var sentmail = require('./app/routes/sentMail');
-app.use('/', sentmail);
-
 var homeStor = require('./app/routes/backHome');
 app.use('/', homeStor);
+
+var contact = require('./app/routes/contact');
+app.use('/', contact);
 
 app.use(express.static(__dirname + '/public'));
 

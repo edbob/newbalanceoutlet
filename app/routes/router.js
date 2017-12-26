@@ -14,8 +14,4 @@ router.get('/about', function (req, res) {
     { users: users, title: 'The Team' });
 });
 
-router.get('/contact', function (req, res) {
-  res.render('pages/contact');
-});
-
 module.exports = router;
