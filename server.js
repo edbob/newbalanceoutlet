@@ -16,10 +16,10 @@ app.use(expressLayouts);
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
-var router = require('./app/routes/router');
-app.use('/', router);
+var about = require('./app/routes/about');
+app.use('/', about);
 
-var homeStor = require('./app/routes/backHome');
+var homeStor = require('./app/routes/home');
 app.use('/', homeStor);
 
 var contact = require('./app/routes/contact');

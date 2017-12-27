@@ -1,7 +1,7 @@
 var express = require('express');
-var router = express.Router();
+var about = express.Router();
 
-router.get('/about', function (req, res) {
+about.get('/about', function (req, res) {
 
   var users = [
     { name: 'Holly', email: 'holly@scotch.io', avatar: 'http://placekitten.com/700/700' },
@@ -14,4 +14,4 @@ router.get('/about', function (req, res) {
     { users: users, title: 'The Team' });
 });
 
-module.exports = router;
+module.exports = about;

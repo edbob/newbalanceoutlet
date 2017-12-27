@@ -22,21 +22,26 @@ var transporter = nodemailer.createTransport({
   
   var url = require('url');
   var dateNow = new Date().toString().slice(8, 24);
-  
+
   contact.post('/contact', function (req, res) {
+
+    var senderConf = {
+      Sendname: req.body.name,
+      Sendemail: req.body.email
+    }
+
     var mailOptions = {
-      from: hostName +  '<'+req.body.email+'>',
+      from: senderConf.Sendname + '<'+senderConf.Sendemail+'>',
       to: 'nedov@outlook.com',
       subject: req.body.name,
-      text: req.body.message
-      // html: '<p>Email отправителя: '+ req.body.email +'</p>'
+      html: req.body.message + ' <br /> <p><b>Email отправителя: '+ req.body.email + '<br />отправлено с сайта: ' + req.headers.host + ' </b></p>'
     };
   
     transporter.sendMail(mailOptions, function (err, res) {
       if (err) {
         console.log('Error: '.red + err.message + ' [' + dateNow + ']');
       } else {
-        console.log('Email Sent from: ' + req.body.email + "'".green + ' Text: ' + req.body.message + ' [' + dateNow + ']');
+        console.log('Email Sent from: ' + req.body.email + "'".green + ' [' + dateNow + ']');
       }
     });
   

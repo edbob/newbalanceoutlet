@@ -4,20 +4,19 @@ var express = require('express'),
     bodyParser = require('body-parser'),
     request = require('request'),
     cheerio = require('cheerio'),
-    homeStor = express.Router();
+    home = express.Router();
 
-homeStor.use(bodyParser.json());
-homeStor.use(bodyParser.urlencoded({ extended: false }));
-homeStor.use(cookieParser());
+    home.use(bodyParser.json());
+    home.use(bodyParser.urlencoded({ extended: false }));
+    home.use(cookieParser());
 
-homeStor.get('/', function (req, res) {
+    home.get('/', function (req, res) {
     var c = req.cookies.num;
 
     res.render('pages/home', 
     { title: 'Домашняя страница покупок', num: c != undefined ? c : 4 });
 });
-
-homeStor.post('/ajax', function (req, res) {
+home.post('/ajax', function (req, res) {
     res.cookie('num', req.body.num);
     getContent({ 'url': req.body.url, 'count': req.body.num }, function (data) {
         res.json(data);
@@ -59,8 +58,8 @@ function getContent(req, collback) {
     });
 };
 
-if (homeStor.get('env') === 'development') {
-    homeStor.use(function (err, req, res, next) {
+if (home.get('env') === 'development') {
+    home.use(function (err, req, res, next) {
         res.status(err.status || 500);
         res.render('error', {
             message: err.message,
@@ -69,7 +68,7 @@ if (homeStor.get('env') === 'development') {
     });
 }
 
-homeStor.use(function (err, req, res, next) {
+home.use(function (err, req, res, next) {
     res.status(err.status || 500);
     res.render('error', {
         message: err.message,
@@ -77,4 +76,4 @@ homeStor.use(function (err, req, res, next) {
     });
 });
 
-module.exports = homeStor;
+module.exports = home;
