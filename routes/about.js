@@ -1,7 +1,7 @@
 var express = require('express');
 var about = express.Router();
 
-about.get('/about', function (req, res) {
+about.get('/aboutS', function (req, res) {
 
   var users = [
     { name: 'Holly', email: 'holly@scotch.io', avatar: 'http://placekitten.com/700/700' },
