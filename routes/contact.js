@@ -1,7 +1,7 @@
 var express = require('express');
 var nodemailer = require('nodemailer');
-var colors = require('colors');
-var hostName = process.env.host || "localhost:";
+//var colors = require('colors');
+//var hostName = process.env.host || "localhost:";
 
 var contact = express.Router();
 
@@ -13,14 +13,14 @@ var transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
       type: 'OAuth2',
-      user: 'does.not.smoke.here@gmail.com',
-      clientId: '339170722492-v3g2nuuounfkklsrppad41rmanevie86.apps.googleusercontent.com',
-      clientSecret: '44Abz_4zyAJmRegGZbDf_vaF',
+      user: 'doess.not.smoke.here@gmail.com',
+      clientId: '1035288693661-lt524l9f04n6rjgeg0857h2bgqj1u704.apps.googleusercontent.com',
+      clientSecret: 'hFsTVMTeOf9OMoHmijOT5Zrt',
       refreshToken: '1/-esAs_k9pq3laqtgrLsBSZ3ub9sc7CX3SGLpmyEuQ7A'
     }
   });
   
-  var url = require('url');
+  //var url = require('url');
   var dateNow = new Date().toString().slice(8, 24);
 
   contact.post('/contact', function (req, res) {

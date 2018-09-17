@@ -2,3 +2,4 @@
 dist/img/**/*.png
 resource.json
 gulpfile.js
+routes/contact.js

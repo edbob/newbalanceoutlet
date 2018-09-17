@@ -1,10 +1,10 @@
 var express = require('express');
 var expressLayouts = require('express-ejs-layouts');
 var bodyParser = require('body-parser');
-var colors = require('colors');
+//var colors = require('colors');
 var favicon = require('serve-favicon');
 var path = require('path');
-var coolieParser = require('cookie-parser');
+//var coolieParser = require('cookie-parser');
 
 var app = express();
 var port = process.env.PORT || 8089;
