@@ -1,5 +1,6 @@
 var express = require('express');
 var nodemailer = require('nodemailer');
+var configur = require("../db/db.json")
 //var colors = require('colors');
 //var hostName = process.env.host || "localhost:";
 
@@ -14,9 +15,9 @@ var transporter = nodemailer.createTransport({
     auth: {
       type: 'OAuth2',
       user: 'doess.not.smoke.here@gmail.com',
-      clientId: '1035288693661-lt524l9f04n6rjgeg0857h2bgqj1u704.apps.googleusercontent.com',
-      clientSecret: 'hFsTVMTeOf9OMoHmijOT5Zrt',
-      refreshToken: '1/-esAs_k9pq3laqtgrLsBSZ3ub9sc7CX3SGLpmyEuQ7A'
+      clientId: this.clientId = configur.clientId,
+      clientSecret: this.clientId = configur.clientSecret,
+      refreshToken: this.refreshToken = configur.refreshToken
     }
   });
   
