@@ -24,5 +24,8 @@
     "path": "*",
     "request": "*",
     "serve-favicon": "*"
+  },
+  "devDependencies": {
+    "promise": "^8.0.2"
   }
 }
