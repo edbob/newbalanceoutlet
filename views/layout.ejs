@@ -27,11 +27,22 @@
             </ul>
         </nav>
     </header>
-<%- defineContent('hero') %>
+    <%- defineContent('hero') %>
 
     <main>
         <div class="container my-mein">
-         <%- body %>
+            {{#each breadcrumb}}
+            {{#unless @last}}
+            <ol class="breadcrumb">
+                <li><a href="{{this.url}}">{{this.label}}</a></li>
+                {{else}}
+                <li>
+                    <span>{{this.label}}</span>
+                </li>
+                {{/unless}}
+                {{/each}}
+            </ol>
+            <%- body %>
         </div>
     </main>
     <footer>

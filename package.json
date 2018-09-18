@@ -18,6 +18,7 @@
     "ejs": "^2.5.7",
     "express": "4.x",
     "express-ejs-layouts": "^2.3.1",
+    "express-url-breadcrumb": "0.0.8",
     "handlebars": "2.x",
     "hbs": "^4.0.1",
     "nodemailer": "^4.4.1",
