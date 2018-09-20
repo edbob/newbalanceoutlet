@@ -31,17 +31,19 @@
 
     <main>
         <div class="container my-mein">
-            {{#each breadcrumb}}
-            {{#unless @last}}
+            <% if (breadcrumbs) { %>
+            <% for (var i=0; i < breadcrumbs.length; i++) { %>
+            <% if (i == ( breadcrumbs.length - 1 )) { %>
             <ol class="breadcrumb">
-                <li><a href="{{this.url}}">{{this.label}}</a></li>
-                {{else}}
+                <li><a href="<%= breadcrumbs[i].url %>">
+                        <%= breadcrumbs[i].name %></a></li>
                 <li>
-                    <span>{{this.label}}</span>
+                    <span><%= breadcrumbs[i].name %></span>
                 </li>
-                {{/unless}}
-                {{/each}}
             </ol>
+            <% } %>
+            <% } %>
+            <% } %>
             <%- body %>
         </div>
     </main>

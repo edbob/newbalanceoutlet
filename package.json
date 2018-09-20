@@ -27,6 +27,7 @@
     "serve-favicon": "*"
   },
   "devDependencies": {
+    "nodemon": "^1.18.4",
     "promise": "^8.0.2"
   }
 }
