@@ -3,7 +3,8 @@ var express = require('express'),
     cookieParser = require('cookie-parser'),
     bodyParser = require('body-parser'),
     request = require('request'),
-    cheerio = require('cheerio'),
+    cheerio = require('cheerio')
+    
     home = express.Router();
 
     home.use(bodyParser.json());
@@ -14,7 +15,10 @@ var express = require('express'),
     var c = req.cookies.num;
 
     res.render('pages/home', 
-    { title: 'Домашняя страница покупок', num: c != undefined ? c : 4 });
+    { 
+        title: 'Домашняя страница покупок',
+        num: c != undefined ? c : 4
+    });
 });
 home.post('/ajax', function (req, res) {
     res.cookie('num', req.body.num);

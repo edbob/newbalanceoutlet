@@ -5,12 +5,11 @@ var bodyParser = require('body-parser');
 var favicon = require('serve-favicon');
 var path = require('path');
 //var coolieParser = require('cookie-parser');
-var breadcrumb = require('express-url-breadcrumb');
 
 var app = express();
 // use for every request  
 
-var port = process.env.PORT || 8089;
+var port = process.env.PORT || 3000;
 var host = process.env.host || "localhost:";
 
 app.use(favicon(path.join(__dirname, 'public/img', 'favicon.ico')));
@@ -29,28 +28,8 @@ app.use('/', about);
 var contact = require('./routes/contact');
 app.use('/', contact);
 
-var notFound = require('./routes/notFound');
-app.use('/', notFound);
-
-app.use(breadcrumb());
- 
-// alternatively, add to a specific route
-app.get('/', breadcrumb(), function(req, res){
-    res.render('/home');
-});
-
-// use for every request  
-app.use(breadcrumb(function(item, index){
-    // convert each breadcrumb label to upper case
-    item.label = item.label.toUpperCase(); 
-}));
-
-var breadcrumb = [];
-  
-  breadcrumb.push({ label: 'Home', url: '/' });
-  breadcrumb.push({ label: 'about', url: '/about' });
-  breadcrumb.push({ label: 'contact', url: '/contact' });
-  breadcrumb.push({ label: 'notFound', url: '/notFound' });
+var breadcrumb = require('./routes/breadcrumb');
+app.use('/', breadcrumb);
 
 app.listen(port, function (err) {
     if (err) {

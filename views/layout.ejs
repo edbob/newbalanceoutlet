@@ -11,6 +11,7 @@
 </head>
 
 <body>
+
     <header>
         <nav class="navbar navbar-inverse">
             <a href="/" class="navbar-brand">OUTLET Украина!</a>
@@ -26,22 +27,26 @@
                 </li>
             </ul>
         </nav>
+<ol class="breadcrumb">
+     <% if(breadcrumbs){ %>
+        <% for(var i=0; i<breadcrumbs.length; i++){ %>
+                <% if(i == (breadcrumbs.length - 1)){ %>
+                <li>
+                    <span><%= breadcrumbs[i].name %></span>
+                </li>
+                <%} else {%>
+                    <li><a href="<%= breadcrumbs[i].url %>"><%= breadcrumbs[i].name %></a></li>
+                <% } %>
+        <% } %>
+    <% } %>
+</ol>
+    
+
     </header>
     <%- defineContent('hero') %>
 
     <main>
         <div class="container my-mein">
-            {{#each breadcrumb}}
-            {{#unless @last}}
-            <ol class="breadcrumb">
-                <li><a href="{{this.url}}">{{this.label}}</a></li>
-                {{else}}
-                <li>
-                    <span>{{this.label}}</span>
-                </li>
-                {{/unless}}
-                {{/each}}
-            </ol>
             <%- body %>
         </div>
     </main>
