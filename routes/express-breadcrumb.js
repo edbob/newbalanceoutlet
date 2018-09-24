@@ -10,7 +10,7 @@ var Middleware = function() {
 			index = breadCrumbs.indexOf("")
 		}
 
-		breadCrumbs.splice(0,0,"Home")
+		breadCrumbs.splice(0,0,"Главная")
 		req.breadcrumbs = []
 
 		var urlPath = req.headers.host

@@ -3,12 +3,16 @@ var nodemailer = require('nodemailer');
 var configur = require("../db/db.json")
 var colors = require('colors');
 var Promise = require('promise');
+var breadcrumbs = require('./express-breadcrumb');
 //var hostName = process.env.host || "localhost:";
 
 var contact = express.Router();
 
-contact.get('/contact', function (req, res) {
-  res.render('pages/contact');
+contact.get('/contact', breadcrumbs.Middleware(), function (req, res) {
+  res.render('pages/contact',
+  {
+    breadcrumbs: req.breadcrumbs 
+  });
 });
 
 var transporter = nodemailer.createTransport({

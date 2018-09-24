@@ -1,7 +1,8 @@
 var express = require('express');
 var about = express.Router();
+var breadcrumbs = require('./express-breadcrumb');
 
-about.get('/about', function (req, res) {
+about.get('/about', breadcrumbs.Middleware(), function (req, res) {
 
   var users = [
     { name: 'Holly', email: 'holly@scotch.io', avatar: 'http://placekitten.com/700/700' },
@@ -11,7 +12,11 @@ about.get('/about', function (req, res) {
   ];
 
   res.render('pages/about', 
-    { users: users, title: 'The Team' });
+    { 
+      users: users, 
+      title: 'The Team',
+      breadcrumbs: req.breadcrumbs 
+    });
 });
 
 module.exports = about;

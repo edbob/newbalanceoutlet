@@ -3,7 +3,8 @@ var express = require('express'),
     cookieParser = require('cookie-parser'),
     bodyParser = require('body-parser'),
     request = require('request'),
-    cheerio = require('cheerio')
+    cheerio = require('cheerio'),
+    breadcrumbs = require('./express-breadcrumb');
     
     home = express.Router();
 
@@ -11,13 +12,14 @@ var express = require('express'),
     home.use(bodyParser.urlencoded({ extended: false }));
     home.use(cookieParser());
 
-    home.get('/', function (req, res) {
+    home.get('/', breadcrumbs.Middleware(), function (req, res) {
     var c = req.cookies.num;
 
     res.render('pages/home', 
     { 
-        title: 'Домашняя страница покупок',
-        num: c != undefined ? c : 4
+        titleH: 'Домашняя страница покупок',
+        num: c != undefined ? c : 4,
+        breadcrumbs: req.breadcrumbs
     });
 });
 home.post('/ajax', function (req, res) {
